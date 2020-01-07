@@ -1,0 +1,102 @@
+https://www.liaoxuefeng.com/wiki/896043488029600
+
+创建SSH KEY
+$ ssh-keygen -t rsa -C "youremail@example.com"
+
+认证
+$ git config --global user.name "Your Name"
+$ git config --global user.email "email@example.com"
+创建版本库
+$ git init
+
+
+$ git add readme.txt
+$ git commit -m "wrote a readme file"
+$ git status
+$ git diff readme.txt 
+$ git log --pretty=oneline
+场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令git checkout -- file。
+场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令git reset HEAD <file>，就回到了场景1，第二步按场景1操作。      
+回退（windos要写引号）
+$ git reset --hard HEAD
+$ git reset --hard HEAD^
+$ git reset --hard HEAD^^
+$ git reset --hard HEAD~100
+$ git reset --hard 1094a
+命令日志
+$ git reflog
+撤销修改，回到最近一次git commit或git add时的状态
+$ git checkout -- readme.txt
+撤销工作区的修改
+git restore readme.txt
+删除
+$ git rm test.txt
+$ git commit -m "remove test.txt"
+远程库关联
+git remote add origin git@github.com:b8kname/learnGit.git
+本地远程库关联删除
+git remote rm origin
+创建并推送分支
+git push -u origin dev
+推送分支
+$ git push origin dev
+
+git pull
+克隆远程库
+git clone git@github.com:b8kname/gitskills.git
+git clone git@github.com:b8kname/gitskills.git alias
+创建并切换分支
+$ git checkout -b dev
+$ git switch -c dev
+创建分支
+$ git branch dev
+切换分支
+$ git checkout dev
+$ git switch master
+查看分支
+$ git branch
+合并分支至当前分支，Fast forward模式
+git merge dev
+合并分支至当前分支，--no-ff方式
+$ git merge --no-ff -m "merge with no-ff" dev
+删除分支
+$ git branch -d dev
+
+$ git log --pretty=oneline --abbrev-commit
+用带参数的git log也可以看到分支的合并情况
+$ git log --graph --pretty=oneline --abbrev-commit
+分支合并图
+git log --graph
+工作区stash临时存储
+$ git stash
+$ git stash list
+stash恢复并删除
+$ git stash pop
+stash恢复
+$ git stash apply stash@{0}
+stash删除
+$ git stash drop stash@{0}
+复制一个特定的提交到当前分支
+$ git cherry-pick 4c805e2
+查看远程库的信息
+$ git remote
+$ git remote -v
+设置dev和origin/dev的链接
+$ git branch --set-upstream-to=origin/dev dev
+拉取远程分支并本地创建关联
+$ git checkout -t origin/feature
+rebase操作的特点：把分叉的提交历史“整理”成一条直线，看上去更直观。缺点是本地的分叉提交已经被修改过了。
+$ git rebase
+标签
+git tag v1.0
+git tag
+$ git tag v0.9 f52c633
+$ git show v0.9
+$ git tag -a v0.1 -m "version 0.1 released" 1094adb
+$ git tag -d v0.1
+$ git push origin v1.0
+推送所有标签
+$ git push origin --tags
+远程删除标签
+$ git push origin :refs/tags/v0.9
+
